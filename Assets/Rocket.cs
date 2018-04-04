@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    Rigidbody rigidbody;
+
+    // Use this for initialization
+    void Start () {
+
+        rigidbody = GetComponent<Rigidbody>();
 		
 	}
 	
@@ -22,7 +26,7 @@ public class Rocket : MonoBehaviour {
         //DO PRZODU
         if(Input.GetKey(KeyCode.W))
         {
-            print("^");
+            rigidbody.AddRelativeForce(Vector3.up);
         }
         //BOKI 
         if (Input.GetKey(KeyCode.A))
