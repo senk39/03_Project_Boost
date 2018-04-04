@@ -7,6 +7,7 @@ public class Rocket : MonoBehaviour {
 
     Rigidbody rigidbody;
 
+
     // Use this for initialization
     void Start () {
 
@@ -24,11 +25,30 @@ public class Rocket : MonoBehaviour {
 
     private void ProcessInput()
     {
+        AudioSource audio = GetComponent<AudioSource>();
+
         //DO PRZODU
-        if(Input.GetKey(KeyCode.W))
+       
+        if (Input.GetKey(KeyCode.W))
         {
             rigidbody.AddRelativeForce(Vector3.up);
+
+            
+
         }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            audio.Play();
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            audio.Stop();
+
+        }
+
+
         //BOKI 
         if (Input.GetKey(KeyCode.A))
         {
