@@ -11,6 +11,7 @@ public class Rocket : MonoBehaviour {
     void Start () {
 
         rigidbody = GetComponent<Rigidbody>();
+       // transform = GetComponent<Transform>();
 		
 	}
 	
@@ -31,11 +32,11 @@ public class Rocket : MonoBehaviour {
         //BOKI 
         if (Input.GetKey(KeyCode.A))
         {
-            print("<");
+            transform.Rotate((Vector3.forward * Time.deltaTime ) * 250);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            print(">");
+            transform.Rotate((Vector3.back * Time.deltaTime ) * 250);
         }
     }
 }
