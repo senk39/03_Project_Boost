@@ -36,10 +36,13 @@ public class Rocket : MonoBehaviour {
             
 
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (!audio.isPlaying)
         {
-            audio.Play();
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                audio.Play();
 
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.W))
