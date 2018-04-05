@@ -12,54 +12,60 @@ public class Rocket : MonoBehaviour {
     void Start () {
 
         rigidbody = GetComponent<Rigidbody>();
-       // transform = GetComponent<Transform>();
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
         ProcessInput();
-		
 	}
 
     private void ProcessInput()
     {
         AudioSource audio = GetComponent<AudioSource>();
 
-        //DO PRZODU
-       
+        //Controlling the rocket
+        Thrust();
+        Steering();
+
+        //Audio
+        PlayRocketSound(audio);
+        StopRocketSound(audio);       
+    }
+    private void Thrust()
+    {
         if (Input.GetKey(KeyCode.W))
         {
             rigidbody.AddRelativeForce(Vector3.up);
-
-            
-
         }
+    }
+    private void Steering()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate((Vector3.forward * Time.deltaTime) * 250);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate((Vector3.back * Time.deltaTime) * 250);
+        }
+    }
+    private static void PlayRocketSound(AudioSource audio)
+    {
         if (!audio.isPlaying)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
                 audio.Play();
-
             }
         }
-
+    }
+    private static void StopRocketSound(AudioSource audio)
+    {
         if (Input.GetKeyUp(KeyCode.W))
         {
             audio.Stop();
-
-        }
-
-
-        //BOKI 
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate((Vector3.forward * Time.deltaTime ) * 250);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate((Vector3.back * Time.deltaTime ) * 250);
         }
     }
+
 }
