@@ -41,6 +41,8 @@ public class Rocket : MonoBehaviour {
     }
     private void Steering()
     {
+        rigidbody.freezeRotation = true; // take manual control of rotation
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate((Vector3.forward * Time.deltaTime) * 250);
@@ -49,6 +51,8 @@ public class Rocket : MonoBehaviour {
         {
             transform.Rotate((Vector3.back * Time.deltaTime) * 250);
         }
+
+        rigidbody.freezeRotation = false; // take manual control of rotation
     }
     private static void PlayRocketSound(AudioSource audio)
     {
