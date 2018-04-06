@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour {
 
-    Rigidbody rigidbody;
+    [SerializeField] float rcsThrust = 250f;
+    [SerializeField] float upThrust = 550f;
 
+    Rigidbody rigidbody;
 
     // Use this for initialization
     void Start () {
@@ -36,20 +38,23 @@ public class Rocket : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rigidbody.AddRelativeForce(Vector3.up);
+            rigidbody.AddRelativeForce(Vector3.up * upThrust);
         }
     }
     private void Steering()
     {
         rigidbody.freezeRotation = true; // take manual control of rotation
 
+        float rotationThisFrame = rcsThrust * Time.deltaTime;
+
+
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate((Vector3.forward * Time.deltaTime) * 250);
+            transform.Rotate(Vector3.forward * rotationThisFrame);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate((Vector3.back * Time.deltaTime) * 250);
+            transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
 
         rigidbody.freezeRotation = false; // take manual control of rotation
