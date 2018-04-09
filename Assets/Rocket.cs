@@ -3,24 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour {
+public class Rocket : MonoBehaviour
+{
 
-    [SerializeField] float rcsThrust = 250f;
-    [SerializeField] float upThrust = 550f;
+    [SerializeField]
+    float rcsThrust = 250f;
+    [SerializeField]
+    float upThrust = 550f;
 
     Rigidbody rigidbody;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         rigidbody = GetComponent<Rigidbody>();
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         ProcessInput();
-	}
+
+
+    }
 
     private void ProcessInput()
     {
@@ -32,7 +39,7 @@ public class Rocket : MonoBehaviour {
 
         //Audio
         PlayRocketSound(audio);
-        StopRocketSound(audio);       
+        StopRocketSound(audio);
     }
     private void Thrust()
     {
@@ -77,4 +84,15 @@ public class Rocket : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Friendly")
+        {
+            print("nastapil dotyk uwu");
+        }
+        else
+        {
+            print("aua :(");
+        }
+    }
 }
