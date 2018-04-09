@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -88,16 +89,19 @@ public class Rocket : MonoBehaviour
     {
         if(collision.gameObject.tag == "Friendly")
         {
-            print("nastapil dotyk uwu");
+            return;
         }
 
         else if (collision.gameObject.tag == "Finish")
         {
             print("CONGRATS!");
+            SceneManager.LoadScene(1);
         }
         else
         {
             print("aua :(");
+            SceneManager.LoadScene(0);
+
         }
     }
 }
