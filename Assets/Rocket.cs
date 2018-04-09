@@ -90,6 +90,11 @@ public class Rocket : MonoBehaviour
         {
             print("nastapil dotyk uwu");
         }
+
+        else if (collision.gameObject.tag == "Finish")
+        {
+            print("CONGRATS!");
+        }
         else
         {
             print("aua :(");
