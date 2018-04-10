@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
 
+    int currentScene = 0;
+    bool isSteeringFreezed = false;
+
+    enum CurrentStatus { Alive, Dying, Transcending};
+    CurrentStatus currentStatus = CurrentStatus.Alive;
+
     [SerializeField]
     float rcsThrust = 250f;
     [SerializeField]
@@ -26,8 +32,6 @@ public class Rocket : MonoBehaviour
     void Update()
     {
         ProcessInput();
-
-
     }
 
     private void ProcessInput()
@@ -42,9 +46,11 @@ public class Rocket : MonoBehaviour
         PlayRocketSound(audio);
         StopRocketSound(audio);
     }
+
+    //Controlling the rocket
     private void Thrust()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && (isSteeringFreezed == false))
         {
             rigidbody.AddRelativeForce(Vector3.up * upThrust);
         }
@@ -56,17 +62,19 @@ public class Rocket : MonoBehaviour
         float rotationThisFrame = rcsThrust * Time.deltaTime;
 
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && (isSteeringFreezed == false))
         {
             transform.Rotate(Vector3.forward * rotationThisFrame);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && (isSteeringFreezed == false))
         {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
 
         rigidbody.freezeRotation = false; // take manual control of rotation
     }
+    
+    //Audio
     private static void PlayRocketSound(AudioSource audio)
     {
         if (!audio.isPlaying)
@@ -85,23 +93,46 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    //Collision
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Friendly")
+        if(currentStatus != CurrentStatus.Alive)
+        {
+            return;
+        }
+        else if(collision.gameObject.tag == "Friendly")
         {
             return;
         }
 
         else if (collision.gameObject.tag == "Finish")
         {
+            isSteeringFreezed = true;
+            currentStatus = CurrentStatus.Transcending;
             print("CONGRATS!");
-            SceneManager.LoadScene(1);
+            Invoke("LoadNextLevel", 1f);
         }
-        else
+        else // literally Sayori
         {
+            isSteeringFreezed = true;
+            currentStatus = CurrentStatus.Dying;
             print("aua :(");
-            SceneManager.LoadScene(0);
-
+            Invoke("RepeatLevel", 1f);
         }
+    }
+
+    //Load Level
+    void LoadNextLevel()
+    {
+        isSteeringFreezed = false;
+        currentScene++;
+        SceneManager.LoadScene(currentScene);
+    }
+
+    void RepeatLevel()
+    {
+        isSteeringFreezed = false;
+
+        SceneManager.LoadScene(currentScene);
     }
 }
