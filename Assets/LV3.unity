@@ -387,11 +387,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4951589026336388, guid: c0079988c00526b44ac0c24413b745d4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4951589026336388, guid: c0079988c00526b44ac0c24413b745d4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 51.91
+      value: 56.24
       objectReference: {fileID: 0}
     - target: {fileID: 4951589026336388, guid: c0079988c00526b44ac0c24413b745d4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -469,7 +469,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4989768030463428, guid: 5ce30101bef1f24438e00e3a7dea61e9, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1435366002912784, guid: 5ce30101bef1f24438e00e3a7dea61e9, type: 2}
       propertyPath: m_TagString
@@ -839,7 +839,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4144597255274818, guid: 7a25e759adcf40b49b6da2d6e6cdcb86, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a25e759adcf40b49b6da2d6e6cdcb86, type: 2}
@@ -1159,3 +1159,21 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1 &1939277090 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1455368393561270, guid: c0079988c00526b44ac0c24413b745d4,
+    type: 2}
+  m_PrefabInternal: {fileID: 570433238}
+--- !u!114 &1939277091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1939277090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bff8af82df9dc4eb61aaec727ff5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 0, y: 0, z: 0}
+  movementFactor: 0

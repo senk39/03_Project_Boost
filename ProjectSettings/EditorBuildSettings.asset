@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LVL2.unity
     guid: e758e4ebb4df83744b3e18d562106103
+  - enabled: 1
+    path: Assets/LV3.unity
+    guid: 40990c3c2ea550d4c85b1a2cc3a75e5f
