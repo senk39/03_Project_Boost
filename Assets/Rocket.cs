@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
 
-<<<<<<< HEAD
     // todo fix lighting bug
     [SerializeField]
     float rcsThrust = 100f;
@@ -19,20 +18,6 @@ public class Rocket : MonoBehaviour
 
     Rigidbody rigidBody;
     AudioSource audioSource;
-=======
-    int currentScene = 0;
-    bool isSteeringFreezed = false;
-
-    enum CurrentStatus { Alive, Dying, Transcending};
-    CurrentStatus currentStatus = CurrentStatus.Alive;
-
-    [SerializeField]
-    float rcsThrust = 250f;
-    [SerializeField]
-    float upThrust = 550f;
-
-    Rigidbody rigidbody;
->>>>>>> parent of 8c1fc9a... Lesson 57 - My bad code
 
     enum State { Alive, Dying, Transcending }
     State state = State.Alive;
@@ -61,7 +46,6 @@ public class Rocket : MonoBehaviour
 
         switch (collision.gameObject.tag)
         {
-<<<<<<< HEAD
             case "Friendly":
                 // do nothing
                 break;
@@ -80,10 +64,6 @@ public class Rocket : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(success);
         Invoke("LoadNextLevel", 1f); // parameterise time
-=======
-            rigidbody.AddRelativeForce(Vector3.up * upThrust);
-        }
->>>>>>> parent of 8c1fc9a... Lesson 57 - My bad code
     }
 
     private void StartDeathSequence()
@@ -106,7 +86,7 @@ public class Rocket : MonoBehaviour
 
     private void RespondToThrustInput()
     {
-        if (Input.GetKey(KeyCode.Space)) // can thrust while rotating
+        if (Input.GetKey(KeyCode.W)) // can thrust while rotating
         {
             ApplyThrust();
         }
