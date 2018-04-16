@@ -4,17 +4,15 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
 
-    // todo fix lighting bug
-    [SerializeField]
-    float rcsThrust = 100f;
-    [SerializeField]
-    float mainThrust = 100f;
-    [SerializeField]
-    AudioClip mainEngine;
-    [SerializeField]
-    AudioClip success;
-    [SerializeField]
-    AudioClip death;
+    [SerializeField] float rcsThrust = 100f;
+    [SerializeField] float mainThrust = 100f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip success;
+    [SerializeField] AudioClip death;
+
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem deathParticles;
 
     Rigidbody rigidBody;
     AudioSource audioSource;
@@ -32,7 +30,6 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // todo somewhere stop sound on death
         if (state == State.Alive)
         {
             RespondToThrustInput();
@@ -61,6 +58,7 @@ public class Rocket : MonoBehaviour
     private void StartSuccessSequence()
     {
         state = State.Transcending;
+        successParticles.Play();
         audioSource.Stop();
         audioSource.PlayOneShot(success);
         Invoke("LoadNextLevel", 1f); // parameterise time
@@ -69,7 +67,9 @@ public class Rocket : MonoBehaviour
     private void StartDeathSequence()
     {
         state = State.Dying;
+        deathParticles.Play();
         audioSource.Stop();
+        mainEngineParticles.Stop();
         audioSource.PlayOneShot(death);
         Invoke("LoadFirstLevel", 1f); // parameterise time
     }
@@ -93,6 +93,8 @@ public class Rocket : MonoBehaviour
         else
         {
             audioSource.Stop();
+            mainEngineParticles.Stop();
+
         }
     }
 
@@ -103,6 +105,7 @@ public class Rocket : MonoBehaviour
         {
             audioSource.PlayOneShot(mainEngine);
         }
+        mainEngineParticles.Play();
     }
 
     private void RespondToRotateInput()
@@ -110,6 +113,7 @@ public class Rocket : MonoBehaviour
         rigidBody.freezeRotation = true; // take manual control of rotation
 
         float rotationThisFrame = rcsThrust * Time.deltaTime;
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward * rotationThisFrame);
