@@ -13,12 +13,13 @@ public class Rocket : MonoBehaviour
     enum CurrentStatus { Alive, Dying, Transcending};
     CurrentStatus currentStatus = CurrentStatus.Alive;
 
-    [SerializeField]
-    float rcsThrust = 250f;
-    [SerializeField]
-    float upThrust = 550f;
+    [SerializeField] float rcsThrust = 250f;
+    [SerializeField] float upThrust = 550f;
+    [SerializeField] AudioClip mainEngine;
+
 
     Rigidbody rigidbody;
+    AudioSource audioSource;
 
     // Use this for initialization
     void Start()
@@ -53,7 +54,18 @@ public class Rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && (isSteeringFreezed == false))
         {
             rigidbody.AddRelativeForce(Vector3.up * upThrust);
+            
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(mainEngine);
+            }
         }
+        else
+        {
+            audioSource.Stop();
+        
+        }
+
     }
     private void Steering()
     {
