@@ -12,16 +12,21 @@ public class Oscillator : MonoBehaviour {
     [SerializeField]
     float movementFactor;
 
-    //Vector3 startingPos = (0.0f, 0.0f, 0.0f); TODO
+    Vector3 startingPos;
+        //= (0.0f, 0.0f, 0.0f);
 
 
     // Use this for initialization
     void Start () {
+        startingPos = transform.position;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        Vector3 offset = movementVector * movementFactor;
+        transform.position = startingPos + offset;
 		
 	}
 }
