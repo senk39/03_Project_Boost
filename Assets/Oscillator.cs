@@ -20,14 +20,15 @@ public class Oscillator : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        startingPos = transform.position;
-		
+        startingPos = transform.position;	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        if(!cycles==0)
+        {
         float cycles = Time.time / period;
+        }
 
         const float tau = Mathf.PI * 2;
         float rawSinWave = Mathf.Sin(cycles * tau);
